@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:7
+    container_name: property-dekho-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: property-dekho
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - property-dekho-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  property-dekho-network:
+    driver: bridge
