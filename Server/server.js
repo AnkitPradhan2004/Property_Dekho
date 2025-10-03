@@ -40,7 +40,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // CORS - allow frontend dev server
 const corsOptions = {
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [
+    process.env.CLIENT_URL || 'http://localhost:5173',
+    'https://propertydekhoin.netlify.app',
+    'https://*.netlify.app'
+  ],
   credentials: true,
   methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization','X-Requested-With'],
