@@ -3,6 +3,11 @@ const router = express.Router();
 const controller = require("../controllers/propertyController");
 const { isAuthenticated, isAdmin, isOwnerOrAdmin } = require("../middlewares/authMiddleware");
 
+// Test route
+router.get("/test", (req, res) => {
+  res.json({ message: "Backend is working!", timestamp: new Date() });
+});
+
 // Public
 router.get("/", controller.getProperties);
 router.get("/nearby/:id", controller.getNearbyProperties);

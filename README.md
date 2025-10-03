@@ -1,84 +1,126 @@
-# Property Dekho - Real Estate Platform
+# 🏠 Property Dekho - Full Stack Real Estate Platform
 
-A modern full-stack real estate platform built with MERN stack, featuring property listings, advanced search, map integration, image upload, and user authentication.
+A complete MERN stack real estate application with property listings, user authentication, image upload, search functionality, and admin panel.
 
-## 🚀 Features
+## 🌟 Live Demo
 
-### Core Features
-- **User Authentication** - JWT-based login/signup with Google OAuth
-- **Property Management** - Full CRUD operations for properties
-- **Image Upload** - Cloudinary integration with fallback support
-- **Advanced Search** - Multi-field search with smart suggestions
-- **Interactive Map** - Property locations with markers and popups
-- **Favorites & Comparison** - Save and compare up to 4 properties
-- **Responsive Design** - Mobile-first, touch-friendly interface
+- **Frontend**: https://property-dekho-in.onrender.com
+- **Backend API**: https://propertydekho-in.onrender.com
 
-### Advanced Features
-- **Infinite Scroll** - Smooth property loading
-- **Real-time Filters** - Price, type, location, amenities
-- **Image Carousel** - Zoom, swipe, full-screen view
-- **Nearby Properties** - Location-based property discovery
-- **User Dashboard** - Manage listings and favorites
-- **Contact System** - Inquiry forms and messaging
+## ✨ Features
+
+### 🏡 Property Management
+- Browse properties with infinite scroll
+- Advanced search and filtering
+- Create, edit, delete property listings
+- Image upload with Cloudinary integration
+- Interactive property maps
+- Nearby properties discovery
+
+### 👤 User Features
+- JWT Authentication + Google OAuth
+- User registration and login
+- Profile management
+- Favorites system
+- Property comparison (up to 4)
+- Real-time chat between users
+
+### 🔐 Admin Features
+- Admin dashboard
+- User management (block/unblock)
+- Property oversight
+- Role-based access control
+
+### 🎨 UI/UX
+- Responsive design (mobile-first)
+- Modern animations with Framer Motion
+- Toast notifications
+- Loading states and skeletons
+- Touch-friendly interface
 
 ## 🛠️ Tech Stack
 
-**Frontend:**
-- React 19 + Vite
-- Tailwind CSS
-- Framer Motion
-- React Query
-- Axios
-- Lucide Icons
+### Frontend
+- **React 19** - UI Library
+- **Vite** - Build tool
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **React Query** - Data fetching
+- **Axios** - HTTP client
+- **React Router** - Navigation
 
-**Backend:**
-- Node.js + Express
-- MongoDB Atlas
-- JWT Authentication
-- Cloudinary
-- Multer
-- Passport.js (Google OAuth)
+### Backend
+- **Node.js** - Runtime
+- **Express.js** - Web framework
+- **MongoDB** - Database
+- **Mongoose** - ODM
+- **JWT** - Authentication
+- **bcrypt** - Password hashing
+- **Socket.io** - Real-time chat
+- **Cloudinary** - Image storage
+- **Nodemailer** - Email service
 
-## 📋 Prerequisites
+## 🚀 Quick Start
 
+### Prerequisites
 - Node.js 18+
 - MongoDB Atlas account
-- Cloudinary account (optional)
-- Google OAuth credentials (optional)
+- Git
 
-## ⚡ Quick Start
-
-### 1. Clone & Install
-
+### 1. Clone Repository
 ```bash
-# Clone the repository
-git clone <repository-url>
+git clone https://github.com/AnkitPradhan2004/Property_Dekho.git
 cd Property_Dekho
+```
 
-# Install backend dependencies
+### 2. Backend Setup
+```bash
 cd Server
 npm install
 
-# Install frontend dependencies
-cd ../Client
-npm install
+# Create .env file
+cp .env.example .env
+# Add your MongoDB URI, JWT secret, etc.
+
+# Seed database
+npm run seed
+
+# Start server
+npm start
 ```
 
-### 2. Environment Setup
+### 3. Frontend Setup
+```bash
+cd ../Client
+npm install
 
-**Backend (.env in Server folder):**
+# Create .env file
+cp .env.example .env
+# Add your API URL
+
+# Start frontend
+npm run dev
+```
+
+### 4. Access Application
+- Frontend: http://localhost:5173
+- Backend: http://localhost:5000
+
+## 📋 Environment Variables
+
+### Backend (.env)
 ```env
 PORT=5000
-MONGODB_URI=your_mongodb_atlas_connection_string
-JWT_SECRET=your_super_secret_jwt_key_min_32_chars
-JWT_EXPIRES_IN=7d
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_min_32_chars
+JWT_EXPIRES_IN=1d
 
-# Cloudinary (optional - uses placeholder images if not provided)
+# Cloudinary (optional)
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
-# Email (for password reset)
+# Email (optional)
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USER=your_email@gmail.com
@@ -90,49 +132,65 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 GOOGLE_CALLBACK_URL=http://localhost:5000/auth/google/callback
 
 # URLs
-CLIENT_URL=http://localhost:5173
 FRONTEND_URL=http://localhost:5173
-COOKIE_KEY=your_cookie_session_key
+CLIENT_URL=http://localhost:5173
+COOKIE_KEY=your_cookie_secret
 ```
 
-**Frontend (.env in Client folder):**
+### Frontend (.env)
 ```env
 VITE_API_URL=http://localhost:5000
 VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
 ```
 
-### 3. Database Setup
+## 👥 Test Accounts
 
-```bash
-# Seed database with sample data
-cd Server
-npm run seed
+After running `npm run seed`:
+
+**Regular Users** (password: `password123`):
+- rajesh@example.com
+- priya@example.com
+- amit@example.com
+- sneha@example.com
+- vikram@example.com
+
+**Admin** (password: `password@123`):
+- ankit@gmail.com
+
+## 🔌 API Endpoints
+
+### Authentication
+```
+POST /auth/signup          # User registration
+POST /auth/login           # User login
+GET  /auth/me              # Get current user
+GET  /auth/google          # Google OAuth
 ```
 
-### 4. Start Development Servers
-
-```bash
-# Terminal 1 - Backend
-cd Server
-npm start
-
-# Terminal 2 - Frontend
-cd Client
-npm start
+### Properties
+```
+GET    /properties         # Get all properties (with filters)
+GET    /properties/:id     # Get single property
+POST   /properties         # Create property (auth required)
+PUT    /properties/:id     # Update property (auth required)
+DELETE /properties/:id     # Delete property (auth required)
 ```
 
-### 5. Access Application
+### Users
+```
+GET  /users/profile        # Get user profile
+PUT  /users/profile        # Update profile
+POST /users/favorites      # Toggle favorite
+GET  /users/favorites      # Get favorites
+POST /users/comparisons    # Toggle comparison
+GET  /users/comparisons    # Get comparisons
+```
 
-- **Frontend:** http://localhost:5173
-- **Backend API:** http://localhost:5000
-
-## 🔐 Demo Credentials
-
-After running the seed script:
-
-- **User:** john@example.com / password123
-- **User:** jane@example.com / password123
-- **Admin:** admin@example.com / password123
+### File Upload
+```
+POST /uploads/image        # Upload single image
+POST /uploads/images       # Upload multiple images
+```
 
 ## 📁 Project Structure
 
@@ -145,7 +203,6 @@ Property_Dekho/
 │   │   ├── context/        # React context
 │   │   ├── services/       # API services
 │   │   └── api/           # Axios configuration
-│   ├── .env.example       # Environment template
 │   └── package.json
 │
 ├── Server/                 # Node.js Backend
@@ -156,191 +213,99 @@ Property_Dekho/
 │   ├── config/            # Configuration files
 │   ├── utils/             # Utility functions
 │   ├── scripts/           # Database scripts
-│   ├── .env.example       # Environment template
 │   └── package.json
 │
+├── USER_CREDENTIALS.md     # Test user accounts
 └── README.md              # This file
 ```
 
-## 🔌 API Endpoints
+## 🚀 Deployment
 
-### Authentication
-```bash
-POST /auth/signup          # User registration
-POST /auth/login           # User login
-GET  /auth/me              # Get current user
-GET  /auth/google          # Google OAuth login
-```
+### Backend (Render)
+1. Create new Web Service on Render
+2. Connect GitHub repository
+3. Set Root Directory: `Server`
+4. Set Build Command: `npm install`
+5. Set Start Command: `npm start`
+6. Add environment variables
+7. Deploy
 
-### Properties
-```bash
-GET    /properties         # List properties (with filters)
-GET    /properties/:id     # Get single property
-POST   /properties         # Create property (auth required)
-PUT    /properties/:id     # Update property (auth required)
-DELETE /properties/:id     # Delete property (auth required)
-GET    /properties/nearby/:id  # Get nearby properties
-```
-
-### User Features
-```bash
-GET  /users/profile        # Get user profile
-PUT  /users/profile        # Update profile
-POST /users/favorites      # Toggle favorite
-GET  /users/favorites      # Get favorites
-POST /users/comparisons    # Toggle comparison
-GET  /users/comparisons    # Get comparisons
-```
-
-### File Upload
-```bash
-POST /uploads/image        # Upload single image
-POST /uploads/images       # Upload multiple images
-```
-
-## 🔍 Search Features
-
-### Search Types
-- **Text Search:** Property name, description, location
-- **Location Search:** City, region, address
-- **Filter Search:** Type, price, bedrooms, amenities
-- **Map Search:** Nearby properties within radius
-
-### Search Examples
-```bash
-# Search by location
-GET /properties?query=New York
-
-# Search with filters
-GET /properties?type=apartment&minPrice=100000&maxPrice=500000
-
-# Search by coordinates
-GET /properties?lat=40.7128&lng=-74.0060&radius=10
-
-# Combined search
-GET /properties?query=modern&type=apartment&city=New York
-```
-
-## 🗺️ Map Integration
-
-### Features
-- Interactive property markers
-- Property details on click
-- User location detection
-- Nearby property discovery
-- Custom map controls
-- Responsive design
-
-### Usage
-1. Switch to "Map" view mode
-2. Click markers for property details
-3. Use controls for navigation
-4. Allow location access for user position
-
-## 📱 Mobile Features
-
-- Touch-friendly interface
-- Swipe gestures for image carousel
-- Responsive grid layouts
-- Mobile-optimized search
-- Touch-friendly map controls
+### Frontend (Render)
+1. Create new Static Site on Render
+2. Connect GitHub repository
+3. Set Root Directory: `Client`
+4. Set Build Command: `npm run build`
+5. Set Publish Directory: `dist`
+6. Add environment variables
+7. Deploy
 
 ## 🔒 Security Features
 
-- JWT authentication
-- Input sanitization
-- XSS protection
+- JWT authentication with secure tokens
+- Password hashing with bcrypt (12 rounds)
+- Input sanitization and validation
+- XSS protection with security headers
+- Rate limiting on API endpoints
 - CORS configuration
-- Rate limiting
-- Password hashing (bcrypt)
-- Environment validation
+- Environment variable protection
 
-## 🚀 Deployment
+## 🎯 Key Features Showcase
 
-### Backend Deployment
-1. Set production environment variables
-2. Update CORS origins
-3. Deploy to Heroku/Railway/DigitalOcean
-4. Update frontend API URL
+### Advanced Search
+- Multi-field search (title, description, location)
+- Price range filtering
+- Property type filtering
+- Amenities filtering
+- Location-based search
 
-### Frontend Deployment
-1. Update VITE_API_URL to production backend
-2. Build: `npm run build`
-3. Deploy to Vercel/Netlify/AWS S3
+### Real-time Chat
+- Socket.io powered messaging
+- User authentication for chat
+- Message history
+- Online/offline status
 
-## 🧪 Testing
+### Image Management
+- Cloudinary integration
+- Multiple image upload
+- Image optimization
+- Fallback placeholder images
 
-### Manual Testing Checklist
-- [ ] User registration and login
-- [ ] Google OAuth login
-- [ ] Property creation with image upload
-- [ ] Property search and filtering
-- [ ] Map view and property markers
-- [ ] Favorites and comparison features
-- [ ] Responsive design on mobile
-- [ ] Image carousel functionality
+### Responsive Design
+- Mobile-first approach
+- Touch-friendly interfaces
+- Optimized for all screen sizes
 
-### API Testing
-```bash
-# Test backend connection
-curl http://localhost:5000/properties
+## 🤝 Contributing
 
-# Test authentication
-curl -X POST http://localhost:5000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"john@example.com","password":"password123"}'
-
-# Test property creation
-curl -X POST http://localhost:5000/properties \
-  -H "Authorization: Bearer <TOKEN>" \
-  -F "title=Test Property" \
-  -F "price=250000" \
-  -F "type=apartment"
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Backend won't start:**
-- Check MongoDB connection string
-- Verify all required environment variables
-- Ensure Node.js version 18+
-
-**Frontend build fails:**
-- Clear node_modules: `rm -rf node_modules package-lock.json && npm install`
-- Check environment variables
-- Verify API URL is correct
-
-**Images not uploading:**
-- Check Cloudinary credentials
-- Verify file size limits (10MB max)
-- Fallback URLs used if Cloudinary unavailable
-
-**Google OAuth not working:**
-- Verify Google OAuth credentials
-- Check callback URL configuration
-- Ensure domain is authorized
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
 
 ## 📄 License
 
 This project is licensed under the MIT License.
 
-## 🤝 Contributing
+## 👨‍💻 Developer
 
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/new-feature`
-3. Commit changes: `git commit -am 'Add new feature'`
-4. Push to branch: `git push origin feature/new-feature`
-5. Submit pull request
+**Ankit Pradhan**
+- GitHub: [@AnkitPradhan2004](https://github.com/AnkitPradhan2004)
+- Email: 2004ankitpradhan@gmail.com
+- LinkedIn: [Ankit Pradhan](https://linkedin.com/in/ankitpradhan2004)
 
-## 📞 Support
+## 🙏 Acknowledgments
 
-For support and questions:
-- Create an issue on GitHub
-- Check the troubleshooting section
-- Review the API documentation
+- MongoDB Atlas for database hosting
+- Cloudinary for image management
+- Render for deployment
+- React community for amazing ecosystem
+- All open-source contributors
 
 ---
 
-**Built with ❤️ using MERN Stack**
+⭐ **Star this repository if you found it helpful!**
+
+🐛 **Found a bug?** [Create an issue](https://github.com/AnkitPradhan2004/Property_Dekho/issues)
+
+💡 **Have suggestions?** [Start a discussion](https://github.com/AnkitPradhan2004/Property_Dekho/discussions)
