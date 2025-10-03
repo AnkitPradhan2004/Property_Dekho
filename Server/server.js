@@ -42,8 +42,8 @@ app.use(express.urlencoded({ extended: true }));
 const corsOptions = {
   origin: [
     process.env.CLIENT_URL || 'http://localhost:5173',
-    'https://propertydekhoin.netlify.app',
-    'https://*.netlify.app'
+    'https://property-dekho-in.onrender.com',
+    'https://*.onrender.com'
   ],
   credentials: true,
   methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
