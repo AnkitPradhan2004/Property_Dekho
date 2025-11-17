@@ -60,7 +60,14 @@ export const AuthProvider = ({ children }) => {
         }
       } catch (error) {
         console.error('Auth check failed:', error);
-        localStorage.removeItem("token");
+        // Only remove token if it's an auth error, not a network error
+        if (error.response?.status === 401 || error.response?.status === 403) {
+          localStorage.removeItem("token");
+        }
+        // Don't show error toast on initial load if server is down
+        if (error.code !== 'ECONNREFUSED' && error.code !== 'ERR_NETWORK') {
+          console.warn('Authentication check failed, but keeping token for retry');
+        }
       }
     }
     setLoading(false);

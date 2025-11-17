@@ -40,11 +40,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // CORS - allow frontend dev server
 const corsOptions = {
-  origin: [
-    process.env.CLIENT_URL || 'http://localhost:5173',
-    'https://property-dekho-in.onrender.com',
-    'https://*.onrender.com'
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      process.env.CLIENT_URL || 'http://localhost:5173',
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'https://property-dekho-in.onrender.com'
+    ];
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization','X-Requested-With'],
@@ -66,6 +78,16 @@ app.use(cookieSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'Property Dekho API is running',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
 
 // routes
 app.use("/auth", authRoutes);
@@ -94,8 +116,9 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
   // Step 2: setup socket.io on that server
   const io = new Server(server, {
     cors: {
-      origin: process.env.CLIENT_URL || "http://localhost:5173",
-      methods: ["GET", "POST"]
+      origin: [process.env.CLIENT_URL || "http://localhost:5173", "http://localhost:5173"],
+      methods: ["GET", "POST"],
+      credentials: true
     }
   });
 

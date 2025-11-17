@@ -83,18 +83,28 @@ const Home = () => {
     refetch
   } = useQuery({
     queryKey: ['properties', JSON.stringify(filters ?? {}), searchQuery, currentPage],
-    queryFn: () => {
-      const params = {
-        ...filters,
-        page: currentPage,
-        limit: 10,
-        search: searchQuery
-      };
-      return propertyAPI.getProperties(params).then(res => res.data);
+    queryFn: async () => {
+      try {
+        const params = {
+          ...filters,
+          page: currentPage,
+          limit: 10,
+          search: searchQuery
+        };
+        const response = await propertyAPI.getProperties(params);
+        return response.data;
+      } catch (error) {
+        console.error('Properties fetch error:', error);
+        if (error.code === 'ECONNREFUSED' || error.code === 'ERR_NETWORK') {
+          throw new Error('Unable to connect to server. Please make sure the backend is running on http://localhost:5000');
+        }
+        throw error;
+      }
     },
-    retry: 0,
+    retry: 1,
+    retryDelay: 1000,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
+    refetchOnReconnect: true,
   });
 
   const properties = data?.properties || [];

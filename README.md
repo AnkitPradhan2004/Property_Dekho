@@ -62,49 +62,61 @@ A complete MERN stack real estate application with property listings, user authe
 
 ## 🚀 Quick Start
 
-### Prerequisites
+> **⚡ FASTEST WAY:** Use the automated setup scripts!
+
+### Option 1: Automated Setup (Recommended)
+```bash
+# 1. Setup dependencies and database
+setup-dev.bat
+
+# 2. Start development servers
+start-dev.bat
+```
+
+### Option 2: Manual Setup
+
+#### Prerequisites
 - Node.js 18+
 - MongoDB Atlas account
 - Git
 
-### 1. Clone Repository
+#### 1. Clone Repository
 ```bash
 git clone https://github.com/AnkitPradhan2004/Property_Dekho.git
 cd Property_Dekho
 ```
 
-### 2. Backend Setup
+#### 2. Backend Setup
 ```bash
 cd Server
 npm install
 
-# Create .env file
-cp .env.example .env
-# Add your MongoDB URI, JWT secret, etc.
-
-# Seed database
+# Environment is already configured for development
+# Seed database with sample data
 npm run seed
 
 # Start server
-npm start
+npm run dev
 ```
 
-### 3. Frontend Setup
+#### 3. Frontend Setup
 ```bash
 cd ../Client
 npm install
 
-# Create .env file
-cp .env.example .env
-# Add your API URL
-
+# Environment is already configured for development
 # Start frontend
 npm run dev
 ```
 
-### 4. Access Application
+#### 4. Access Application
 - Frontend: http://localhost:5173
 - Backend: http://localhost:5000
+- Health Check: http://localhost:5000/health
+
+### 🆘 Having Issues?
+- Check **[QUICK_START.md](QUICK_START.md)** for step-by-step guide
+- See **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** for common problems
 
 ## 📋 Environment Variables
 
