@@ -1,23 +1,24 @@
 # Property Dekho - Quick Start Guide
 
-## 🚀 Get Started in 3 Steps
+## 🚀 Get Started in 2 Steps
 
-### Step 1: Setup Environment
+### Step 1: Install Dependencies
 ```bash
-# Run the setup script (installs dependencies & seeds database)
-setup-dev.bat
+# Install frontend dependencies
+cd Client
+npm install
 ```
 
-### Step 2: Start Development Servers
+### Step 2: Start Frontend (Uses Deployed Backend)
 ```bash
-# Start both frontend and backend servers
-start-dev.bat
+# Start frontend only - connects to deployed backend automatically
+start-frontend-only.bat
 ```
 
 ### Step 3: Open Application
 - Frontend: http://localhost:5173
-- Backend API: http://localhost:5000
-- Health Check: http://localhost:5000/health
+- Backend API: https://property-dekho-in.onrender.com
+- Health Check: https://property-dekho-in.onrender.com/health
 
 ## ✅ What's Fixed
 
